@@ -96,6 +96,8 @@ public class CustomSpinner extends FrameLayout {
         popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
+
 
         textView.setOnClickListener(new OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -106,10 +108,21 @@ public class CustomSpinner extends FrameLayout {
 //                    startAnimation(raw, 0, 180);
                     raw.setImageResource(R.mipmap.up);
                     textView.setBackgroundResource(R.drawable.item_pressed_true);
-                    popupWindow.showAsDropDown(textView, 0, 50,Gravity.START);
+                    popupWindow.showAsDropDown(textView, 0, 50, Gravity.START);
                 }
             }
         });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if (data != null) {
+                    textView.setText(data.get(position));
+                    if (popupWindow != null) popupWindow.dismiss();
+                }
+            }
+        });
+
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -136,13 +149,6 @@ public class CustomSpinner extends FrameLayout {
     private CustomSpinner setAdapter() {
         if (listView != null) {
             listView.setAdapter(new MyAdapter(this.data));
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                    textView.setText(data.get(position));
-                    popupWindow.dismiss();
-                }
-            });
         }
         return this;
     }

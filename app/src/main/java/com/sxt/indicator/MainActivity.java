@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
                 list.add("上海");
                 list.add("深圳");
                 list.add("广州");
+                list.add("广州");
+                list.add("广州");
+                list.add("广州");
+                list.add("广州");
                 customSpinner.setListViewData(list);
             }
         });
