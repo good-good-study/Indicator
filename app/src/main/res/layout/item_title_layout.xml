@@ -17,6 +17,7 @@
     <EditText
         android:padding="3dp"
         android:id="@+id/etSearch"
+
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
