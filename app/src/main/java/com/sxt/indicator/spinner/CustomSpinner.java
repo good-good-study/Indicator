@@ -59,18 +59,20 @@ public class CustomSpinner extends FrameLayout {
         }
     }
 
-    @SuppressLint({"ResourceAsColor", "SetTextI18n"})
+    @SuppressLint("ResourceAsColor")
     private void init(Context context) {
         //添加TextView 用于显示用户点击选择的条目内容
         textView = new TextView(context);
-        textView.setTextColor(android.R.color.black);
+        textView.setGravity(Gravity.CENTER_VERTICAL);
+        textView.setTextColor(R.color.black);
+        textView.setPadding(32, 0, 8, 0);
         textView.setBackgroundResource(R.drawable.item_pressed_false);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         addView(textView);
         FrameLayout.LayoutParams params = (LayoutParams) textView.getLayoutParams();
         params.width = LayoutParams.MATCH_PARENT;
         params.height = LayoutParams.MATCH_PARENT;
-        params.gravity = Gravity.CENTER_VERTICAL | Gravity.START;
+        params.gravity = Gravity.CENTER;
         textView.setLayoutParams(params);
 
         //添加右侧的指示箭头
@@ -81,7 +83,7 @@ public class CustomSpinner extends FrameLayout {
         lpRaw.width = LayoutParams.WRAP_CONTENT;
         lpRaw.height = LayoutParams.WRAP_CONTENT;
         lpRaw.gravity = Gravity.CENTER_VERTICAL | Gravity.END;
-        lpRaw.setMargins(0, 0, 32, 0);
+        raw.setPadding(8, 0, 32, 0);
         raw.setLayoutParams(lpRaw);
     }
 
@@ -97,7 +99,6 @@ public class CustomSpinner extends FrameLayout {
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(true);
-
 
         textView.setOnClickListener(new OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
