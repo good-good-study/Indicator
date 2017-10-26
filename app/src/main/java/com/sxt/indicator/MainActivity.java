@@ -1,5 +1,6 @@
 package com.sxt.indicator;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,18 +40,37 @@ public class MainActivity extends AppCompatActivity {
         tvSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startAnimation(titleRoot, 800);
+//                int[] location0 = new int[2];
+//                int[] location1 = new int[2];
+//                int[] location2 = new int[2];
+//
+//                FrameLayout decorView = (FrameLayout) getWindow().getDecorView();
+//                decorView.getLocationOnScreen(location0);
+//                titleRoot.getLocationOnScreen(location1);
+//                titleRoot2.getLocationOnScreen(location2);
+                //startAnimation(titleRoot, 800, 1, 0.8f, location1[1] -titleRoot.getHeight(), location2[1] - titleRoot2.getHeight());
+                startAnimation(titleRoot, true, 200, 1, 0.5f, titleRoot.getTop(), titleRoot2.getTop(),1,0);
             }
         });
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                int[] location0 = new int[2];
+//                int[] location1 = new int[2];
+//                int[] location2 = new int[2];
+//
+//                FrameLayout decorView = (FrameLayout) getWindow().getDecorView();
+//                decorView.getLocationOnScreen(location0);
+//                titleRoot.getLocationOnScreen(location1);
+//                titleRoot2.getLocationOnScreen(location2);
+//                startAnimation(titleRoot, 800, 0.8f, 1, location0[1], 2 * location0[1]);
 
+                titleRoot2.setVisibility(View.INVISIBLE);
+                titleRoot.setVisibility(View.VISIBLE);
+                startAnimation(titleRoot, false, 200, 0.5f, 1, titleRoot2.getTop(), titleRoot.getBottom(),0,1);
             }
         });
-
-
 //        EditText editText = findViewById(R.id.et);
 //        editText.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         //可以输入小数
@@ -115,12 +136,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("ObjectAnimatorBinding")
-    public void startAnimation(View targetView, long duration) {
-
+    public void startAnimation(View targetView, final boolean flag, long duration, float scaleX0, float scaleX1, int translate0, int translate1, float alpha0, float alpha1) {
         AnimatorSet set = new AnimatorSet();
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(targetView, "ScaleX", 1, 0.8f);
-       //TODO  ObjectAnimator translateY = ObjectAnimator.ofFloat(targetView, "TranslateY", );
-        set.setDuration(duration).playTogether(scaleX);
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(targetView, "ScaleX", scaleX0, scaleX1);
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(targetView, "Alpha", alpha0, alpha1);
+        ObjectAnimator translateY = ObjectAnimator.ofFloat(
+                targetView,
+                "TranslationY",
+                translate0,
+                translate1
+        );
+        set.setDuration(duration).playTogether(scaleX, translateY,alpha);
+        set.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+
+                if (flag) {
+                    titleRoot.setVisibility(View.INVISIBLE);
+                    titleRoot2.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
         set.start();
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(1, 0.5f).setDuration(duration);
@@ -129,10 +180,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
 
-                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) titleRoot.getLayoutParams();
-                lp.topMargin -= 1;
-                titleRoot.setLayoutParams(lp);
-//                tvSearch.setEnabled(false);
+                if (flag) {
+                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) titleRoot.getLayoutParams();
+                    lp.topMargin = 0;
+                    titleRoot.setLayoutParams(lp);
+                } else {
+                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) titleRoot.getLayoutParams();
+                    lp.topMargin = 20;
+                    titleRoot.setLayoutParams(lp);
+                }
             }
         };
         valueAnimator.addUpdateListener(mUpdateListener);
