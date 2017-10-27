@@ -5,6 +5,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -27,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        customSpinner = (CustomSpinner) findViewById(R.id.spinnerCustom);
+//        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
+//        customSpinner = (CustomSpinner) findViewById(R.id.spinnerCustom);
 
         tvSearch = findViewById(R.id.tvSearch);
         titleRoot = findViewById(R.id.title_layoutRoot);
@@ -49,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
 //                titleRoot.getLocationOnScreen(location1);
 //                titleRoot2.getLocationOnScreen(location2);
                 //startAnimation(titleRoot, 800, 1, 0.8f, location1[1] -titleRoot.getHeight(), location2[1] - titleRoot2.getHeight());
-                startAnimation(titleRoot, true, 200, 1, 0.5f, titleRoot.getTop(), titleRoot2.getTop(),1,0);
+//                startAnimation(titleRoot, true, 200, 1, 0.5f, titleRoot.getTop(), titleRoot2.getTop(),1,0);
+
+                startActivity(new Intent(MainActivity.this, SecondActivity.class));
+
             }
         });
 
@@ -68,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
                 titleRoot2.setVisibility(View.INVISIBLE);
                 titleRoot.setVisibility(View.VISIBLE);
-                startAnimation(titleRoot, false, 200, 0.5f, 1, titleRoot2.getTop(), titleRoot.getBottom(),0,1);
+                startAnimation(titleRoot, false, 200, 0.5f, 1, titleRoot2.getTop(), titleRoot.getBottom(), 0, 1);
             }
         });
 //        EditText editText = findViewById(R.id.et);
@@ -146,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 translate0,
                 translate1
         );
-        set.setDuration(duration).playTogether(scaleX, translateY,alpha);
+        set.setDuration(duration).playTogether(scaleX, translateY, alpha);
         set.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
@@ -180,15 +184,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
 
-                if (flag) {
-                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) titleRoot.getLayoutParams();
-                    lp.topMargin = 0;
-                    titleRoot.setLayoutParams(lp);
-                } else {
-                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) titleRoot.getLayoutParams();
-                    lp.topMargin = 20;
-                    titleRoot.setLayoutParams(lp);
-                }
+//                if (flag) {
+//                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) titleRoot.getLayoutParams();
+//                    lp.topMargin = 0;
+//                    titleRoot.setLayoutParams(lp);
+//                } else {
+//                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) titleRoot.getLayoutParams();
+//                    lp.topMargin = 10;
+//                    titleRoot.setLayoutParams(lp);
+//                }
             }
         };
         valueAnimator.addUpdateListener(mUpdateListener);

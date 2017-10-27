@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/title_layoutRoot"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="20dp">
 
         <ImageView
             android:layout_width="30dp"
@@ -21,7 +22,7 @@
             android:layout_gravity="center_vertical"
             android:padding="3dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/me_pic_bg"/>
+            android:src="@mipmap/me_pic_bg" />
 
         <TextView
             android:id="@+id/tvSearch"
@@ -35,46 +36,48 @@
             android:gravity="center"
             android:padding="2dp"
             android:text="输入商家. 商品名称"
-            android:textColorHint="@color/gray"/>
+            android:textColorHint="@color/gray" />
     </LinearLayout>
 
     <include
         android:id="@+id/title_2_layout"
         layout="@layout/item_title_layout"
-        android:visibility="invisible"/>
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:visibility="invisible" />
 
 
-    <Spinner
-        android:id="@+id/spinner"
-        style="@style/SpinnerStyle"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:animationCache="true"
-        android:background="@color/white"
-        android:drawSelectorOnTop="true"
-        android:dropDownWidth="60dp"
-        android:minWidth="100dp"
-        android:spinnerMode="dropdown"
-        android:visibility="gone"></Spinner>
+    <!--<Spinner-->
+        <!--android:id="@+id/spinner"-->
+        <!--style="@style/SpinnerStyle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:animationCache="true"-->
+        <!--android:background="@color/white"-->
+        <!--android:drawSelectorOnTop="true"-->
+        <!--android:dropDownWidth="60dp"-->
+        <!--android:minWidth="100dp"-->
+        <!--android:spinnerMode="dropdown"-->
+        <!--android:visibility="gone"></Spinner>-->
 
-    <com.sxt.indicator.spinner.CustomSpinner
-        android:id="@+id/spinnerCustom"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:visibility="gone"></com.sxt.indicator.spinner.CustomSpinner>
+    <!--<com.sxt.indicator.spinner.CustomSpinner-->
+        <!--android:id="@+id/spinnerCustom"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:background="@color/white"-->
+        <!--android:visibility="gone"></com.sxt.indicator.spinner.CustomSpinner>-->
 
 
-    <EditText
-        android:id="@+id/et"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/item_pressed_selector"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:singleLine="true"
-        android:visibility="gone"/>
+    <!--<EditText-->
+        <!--android:id="@+id/et"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:background="@drawable/item_pressed_selector"-->
+        <!--android:paddingLeft="8dp"-->
+        <!--android:paddingRight="8dp"-->
+        <!--android:singleLine="true"-->
+        <!--android:visibility="gone" />-->
 
 </RelativeLayout>
