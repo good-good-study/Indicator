@@ -61,7 +61,6 @@ public class ThirdActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 mSearchBGTxt.setY((Float) valueAnimator.getAnimatedValue());
-
                 mArrowImg.setY(mSearchBGTxt.getY() + (mSearchBGTxt.getHeight() - mArrowImg.getHeight()) / 2);
                 mSearchTxt.setY(mSearchBGTxt.getY() + (mSearchBGTxt.getHeight() - mSearchTxt.getHeight()) / 2);
 //                tvHistory.setY(mSearchBGTxt.getY() + (mSearchBGTxt.getHeight() - tvHistory.getHeight()) / 2);
